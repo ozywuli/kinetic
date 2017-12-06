@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kinetic</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    height: 200px;
+}
+
+.box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: #000;
+}
+button {
+    position: relative;
+    z-index: 10;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    background: silver;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="box"></div>    
+</div>
+
+
+<div class="row">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+
+
+let box = document.querySelector('.box');
+let offsetX;
+let offsetY;
+
+function startDrag(event) {
+    // console.log(`x: ${event.clientX}`);
+    // console.log(`y: ${event.clientY}`);
+
+    offsetX = event.clientX - $(event.target).offset().left;
+    offsetY = event.clientY - $(event.target).offset().top;
+
+    document.addEventListener('mousemove', dragging);
+    document.addEventListener('mouseup', endDrag);
+}
+
+function dragging(event) {
+    box.style.transform = `translate3d(${event.clientX - offsetX}px, ${event.clientY - offsetY}px, 0)`;
+}
+
+function endDrag() {
+    document.removeEventListener('mousemove', dragging);
+}
+
+box.addEventListener('mousedown', startDrag, false);
+
+
+
+
+</script>
+
+</body>
+</html>
